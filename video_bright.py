@@ -20,21 +20,21 @@ while True:
     if not ret:
         break
 
-    result = frame.copy()
-    result = cv2.line(result, (30,60), (220,60), (255,0,0), 3)
-    result = cv2.rectangle(result, (10,10), (1270,710), (0,255,0), 3)
-    result = cv2.circle(result, (640,360), 360, (0,0,255), 3)
+    frame = cv2.resize(frame, (640,360))
 
-    result = cv2.putText(result, 'MY SCENE', (30,40),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.8,
-                        (255,255,255), 2, cv2.LINE_AA)
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    dark = cv2.subtract(gray, 60)
+    bright = cv2.add(gray, 60)
+
+    cv2.imshow('CAPTURE', gray)
+    cv2.imshow('dark', dark)
+    cv2.imshow('bright', bright)
     
-    cv2.imshow('CAPTURE', result)
 
     key = cv2.waitKey(delay) & 0xFF
 
     if key == ord('s'):
-        print('saved:', cv2.imwrite(str(target), result))
+        print('saved:', cv2.imwrite(str(target), gray))
 
     if key == ord('q'):
         break
