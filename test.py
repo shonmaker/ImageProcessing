@@ -1,7 +1,7 @@
 import cv2
 
 color = cv2.imread('road.jpg')
-gray = cv2.imread('road.jpg', cv2.IMREAD_GRAYSCALE)
+gray = cv2.imread(color, cv2.IMREAD_GRAYSCALE)
 
 if color is None or gray is None:
     # if image doesn't exist than add process   
