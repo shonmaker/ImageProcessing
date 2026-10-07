@@ -33,6 +33,14 @@ while True:
 
     key = cv2.waitKey(delay) & 0xFF
 
+    
+    small = gray[140:185, 300:345]
+
+    for flag in [cv2.INTER_NEAREST, cv2.INTER_LINEAR,
+             cv2.INTER_CUBIC,   cv2.INTER_AREA]:
+        up = cv2.resize(small, (640, 360), interpolation = flag)
+        cv2.imshow(f'flag = {flag}', up)
+
     if key == ord('s'):
         print('saved:', cv2.imwrite(str(target), gray))
 
